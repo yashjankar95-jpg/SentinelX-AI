@@ -49,3 +49,8 @@ def test_non_string_input():
 
 def test_missing_hostname():
     assert scan_url("https:///") == "Invalid URL"
+
+
+def test_url_with_surrounding_spaces():
+    result = scan_url("  https://example.com  ")
+    assert "No basic warning detected" in result
