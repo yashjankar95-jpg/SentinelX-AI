@@ -9,3 +9,5 @@ __pycache__/
 sentinelx.db
 scanner.pyX
 scanner.pyx
+scanner.pX
+scanner.pX.backup

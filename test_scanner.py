@@ -33,3 +33,7 @@ def test_non_ascii_hostname_warning():
 def test_url_with_at_symbol_warning():
     result = scan_url("https://example.com@evil.example")
     assert "@" in result
+
+
+def test_url_with_invalid_port():
+    assert scan_url("https://example.com:abc") == "Invalid URL"

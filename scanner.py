@@ -9,6 +9,11 @@ def scan_url(url):
     if parsed.scheme not in ("http", "https") or not parsed.hostname:
         return "Invalid URL"
 
+    try:
+        parsed.port
+    except ValueError:
+        return "Invalid URL"
+
     findings = []
     hostname = parsed.hostname.lower()
 
