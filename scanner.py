@@ -1,4 +1,7 @@
 from urllib.parse import urlparse
+import ipaddress
+import re
+
 
 def scan_url(url):
     parsed = urlparse(url.strip())
@@ -7,12 +10,25 @@ def scan_url(url):
         return "Invalid URL"
 
     findings = []
+    hostname = parsed.hostname.lower()
 
     if parsed.scheme != "https":
         findings.append("Warning: HTTPS is not used")
 
     if parsed.username or parsed.password:
         findings.append("Warning: URL contains embedded credentials")
+
+    try:
+        ipaddress.ip_address(hostname)
+        findings.append("Caution: URL uses an IP address")
+    except ValueError:
+        pass
+
+    if "@" in parsed.netloc:
+        findings.append("Caution: '@' appears in the URL authority")
+
+    if re.search(r"[^\x00-\x7F]", hostname):
+        findings.append("Caution: Non-ASCII hostname characters")
 
     if not findings:
         return "No basic warning detected. Safety is not guaranteed."

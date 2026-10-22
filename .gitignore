@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.pyo
+*.pyoo
+*.bak
+.env
+sentinelx.db
+scanner.pyX
+scanner.pyx
