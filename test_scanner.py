@@ -54,3 +54,7 @@ def test_missing_hostname():
 def test_url_with_surrounding_spaces():
     result = scan_url("  https://example.com  ")
     assert "No basic warning detected" in result
+
+
+def test_port_out_of_range():
+    assert scan_url("https://example.com:70000") == "Invalid URL"
