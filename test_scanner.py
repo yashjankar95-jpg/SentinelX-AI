@@ -45,3 +45,7 @@ def test_empty_url():
 
 def test_non_string_input():
     assert scan_url(None) == "Invalid URL"
+
+
+def test_missing_hostname():
+    assert scan_url("https:///") == "Invalid URL"
