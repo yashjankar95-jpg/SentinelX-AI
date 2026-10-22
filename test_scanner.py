@@ -23,3 +23,13 @@ def test_ip_address_warning():
 def test_embedded_credentials_warning():
     result = scan_url("https://user:pass@example.com")
     assert "embedded credentials" in result
+
+
+def test_non_ascii_hostname_warning():
+    result = scan_url("https://münich.example")
+    assert "Non-ASCII hostname characters" in result
+
+
+def test_url_with_at_symbol_warning():
+    result = scan_url("https://example.com@evil.example")
+    assert "@" in result
