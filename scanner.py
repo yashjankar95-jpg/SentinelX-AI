@@ -4,6 +4,9 @@ import re
 
 
 def scan_url(url):
+    if not isinstance(url, str) or not url.strip():
+        return "Invalid URL"
+
     parsed = urlparse(url.strip())
 
     if parsed.scheme not in ("http", "https") or not parsed.hostname:

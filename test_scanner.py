@@ -37,3 +37,11 @@ def test_url_with_at_symbol_warning():
 
 def test_url_with_invalid_port():
     assert scan_url("https://example.com:abc") == "Invalid URL"
+
+
+def test_empty_url():
+    assert scan_url("") == "Invalid URL"
+
+
+def test_non_string_input():
+    assert scan_url(None) == "Invalid URL"
