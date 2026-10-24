@@ -7,18 +7,24 @@ def scan_url(url):
     if not isinstance(url, str) or not url.strip():
         return "Invalid URL"
 
-    parsed = urlparse(url.strip())
-
-    if parsed.scheme not in ("http", "https") or not parsed.hostname:
-        return "Invalid URL"
-
     try:
-        parsed.port
+        parsed = urlparse(url.strip())
+
+        if parsed.scheme not in ("http", "https"):
+            return "Invalid URL"
+
+        if not parsed.hostname:
+            return "Invalid URL"
+
+        hostname = parsed.hostname.lower()
+
+        # Validate the port, including its allowed range.
+        port = parsed.port
+
     except ValueError:
         return "Invalid URL"
 
     findings = []
-    hostname = parsed.hostname.lower()
 
     if parsed.scheme != "https":
         findings.append("Warning: HTTPS is not used")
